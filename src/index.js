@@ -1,7 +1,7 @@
-import Typy from './typy';
+import Typy from './typy.js';
 
 const t = (input, objectPath) => new Typy().t(input, objectPath);
-const { Schema } = Typy;
+const Schema = Typy.Schema;
 
 const addCustomTypes = (validators) => {
   if (t(validators).isObject) {

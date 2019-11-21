@@ -60,9 +60,4 @@ const convertSchemaAndGetMatch = (obj, schemaObject) => {
   return -1;
 };
 
-module.exports = {
-  getNestedObject,
-  buildSchema,
-  getSchemaMatch,
-  convertSchemaAndGetMatch
-};
+export {getNestedObject, buildSchema, getSchemaMatch, convertSchemaAndGetMatch };

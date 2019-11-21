@@ -1,40 +1,27 @@
-import { getNestedObject, convertSchemaAndGetMatch } from './util';
+import { getNestedObject, convertSchemaAndGetMatch } from './util.js';
 
 class Typy {
-  static Schema = {
-    Number: 1,
-    String: 'typy',
-    Boolean: true,
-    Null: null,
-    Undefined: undefined,
-    Array: [],
-    /* istanbul ignore next */
-    Function: () => {},
-    Date: new Date(),
-    Symbol: Symbol('')
-  };
+  t(obj, options) {
+  this.input = obj;
+  this.schemaCheck = null;
 
-  t = (obj, options) => {
-    this.input = obj;
-    this.schemaCheck = null;
-
-    if (options) {
-      if (typeof options === 'string') {
-        this.input = getNestedObject(this.input, options);
+  if (options) {
+    if (typeof options === 'string') {
+      this.input = getNestedObject(this.input, options);
+    } else {
+      const checkSchema = convertSchemaAndGetMatch(this.input, options);
+      if (checkSchema !== -1) {
+        this.schemaCheck = true;
+        this.input = checkSchema;
       } else {
-        const checkSchema = convertSchemaAndGetMatch(this.input, options);
-        if (checkSchema !== -1) {
-          this.schemaCheck = true;
-          this.input = checkSchema;
-        } else {
-          this.schemaCheck = false;
-          this.input = obj;
-        }
+        this.schemaCheck = false;
+        this.input = obj;
       }
     }
+  }
 
     return this;
-  };
+  }
 
   get isValid() {
     if (
@@ -190,5 +177,18 @@ class Typy {
     return [];
   }
 }
+
+Typy.Schema = {
+  Number: 1,
+  String: 'typy',
+  Boolean: true,
+  Null: null,
+  Undefined: undefined,
+  Array: [],
+  /* istanbul ignore next */
+  Function: () => {},
+  Date: new Date(),
+  Symbol: Symbol('')
+};
 
 export default Typy;
