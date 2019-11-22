@@ -191,4 +191,4 @@ Typy.Schema = {
   Symbol: Symbol('')
 };
 
-export default Typy;
+export { Typy };

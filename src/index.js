@@ -1,4 +1,4 @@
-import Typy from './typy.js';
+import { Typy } from './typy.js';
 
 const t = (input, objectPath) => new Typy().t(input, objectPath);
 const Schema = Typy.Schema;
@@ -20,5 +20,4 @@ const addCustomTypes = (validators) => {
   }
 };
 
-export default t;
 export { t, Schema, addCustomTypes };
